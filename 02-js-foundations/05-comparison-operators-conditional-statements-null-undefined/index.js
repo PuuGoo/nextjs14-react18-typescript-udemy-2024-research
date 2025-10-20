@@ -503,11 +503,11 @@ function processUserData(userData) {
     return;
   }
 
-  const name = userData.name ?? "Unknown";
-  const age = userData.age ?? 0;
-  const email = userData.email ?? "No email provided";
+    const name = userData.name ?? "Unknown";
+    const age = userData.age ?? 0;
+    const email = userData.email ?? "No email provided";
 
-  console.log(`Processing: ${name}, ${age} years old, ${email}`);
+    console.log(`Processing: ${name}, ${age} years old, ${email}`);
 }
 
 processUserData(null);

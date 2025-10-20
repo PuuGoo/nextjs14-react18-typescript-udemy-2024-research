@@ -35,8 +35,9 @@ function scopeExample() {
     const constInBlock = "const trong block";
   }
 
+  
   console.log("Truy cập var ngoài block:", varInBlock); // Hoạt động
-  // console.log(letInBlock); // Lỗi: ReferenceError
+  console.log(letInBlock); // Lỗi: ReferenceError
   // console.log(constInBlock); // Lỗi: ReferenceError
 }
 scopeExample();
@@ -54,7 +55,7 @@ let và const được hoisting nhưng không khởi tạo, dẫn đến Referen
 Đây là lý do nên tránh dùng var trong code hiện đại.
 */
 console.log("\n=== HOISTING ===");
-
+  
 // VAR bị hoisting và có giá trị undefined
 console.log("var trước khai báo:", hoistedVar); // undefined
 var hoistedVar = "Giá trị var";
