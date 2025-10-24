@@ -316,6 +316,7 @@ console.log("Curried multiply:", curriedMultiply(2)(3)(4));
 
 // ========================================
 // 10. CLOSURE - BAO ĐÓNG
+// Closure là khả năng của một hàm trong JavaScript khi ghi nhớ và truy cập các biến từ phạm vi bên ngoài hàm đó, ngay cả khi hàm bên ngoài đã hoàn thành thực thi.
 // ========================================
 
 console.log("\n=== CLOSURE ===");
