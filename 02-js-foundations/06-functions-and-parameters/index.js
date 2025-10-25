@@ -1,313 +1,551 @@
 // ========================================
-// 6. HÀM VÀ THAM SỐ TRONG JAVASCRIPT
+// CHƯƠNG 6: HÀM VÀ THAM SỐ TRONG JAVASCRIPT
+// ========================================
+// Tổng quan: Hàm là khối code có thể tái sử dụng
+// Tham số giúp truyền dữ liệu vào hàm
+
+// ========================================
+// 1. KHAI BÁO HÀM CƠ BẢN (FUNCTION DECLARATION)
 // ========================================
 
-console.log("=== HÀM VÀ THAM SỐ TRONG JAVASCRIPT ===");
+console.log("\n=== 1. KHAI BÁO HÀM CƠ BẢN ===");
 
-// ========================================
-// 1. KHAI BÁO HÀM - FUNCTION DECLARATION
-// ========================================
+// Function Declaration có tính hoisting (được đưa lên đầu scope)
+// Có thể gọi hàm trước khi khai báo
+// Syntax: function tenHam(thamSo) { code }
 
-console.log("\n=== KHAI BÁO HÀM ===");
-
-// Function Declaration - Được hoisted
-function sayHello(name) {
-  return `Xin chào, ${name}!`;
+// Ví dụ 1: Hàm không có tham số
+function chaoMung() {
+  // Hàm đơn giản in ra lời chào
+  console.log("Xin chào các bạn!");
+  return "Chào mừng đến với JavaScript";
 }
+console.log("Ví dụ 1 - Gọi hàm:", chaoMung());
 
-console.log("Function declaration:", sayHello("Alice"));
-
-// Có thể gọi hàm trước khi khai báo (do hoisting)
-console.log("Hoisted function:", hoistedFunction());
-
-function hoistedFunction() {
-  return "Tôi được gọi trước khi khai báo!";
+// Ví dụ 2: Hàm có tham số và return
+function tinhTong(a, b) {
+  // Nhận 2 tham số a và b
+  // Tính tổng và trả về kết quả
+  const ketQua = a + b;
+  return ketQua;
 }
+console.log("Ví dụ 2 - Tổng 5 + 3:", tinhTong(5, 3));
+console.log("Ví dụ 2 - Tổng 10 + 20:", tinhTong(10, 20));
 
 // ========================================
-// 2. BIỂU THỨC HÀM - FUNCTION EXPRESSION
+// 2. BIỂU THỨC HÀM (FUNCTION EXPRESSION)
 // ========================================
 
-console.log("\n=== BIỂU THỨC HÀM ===");
+console.log("\n=== 2. BIỂU THỨC HÀM ===");
 
-// Function Expression - Không được hoisted
-const sayGoodbye = function (name) {
-  return `Tạm biệt, ${name}!`;
+// Function Expression gán hàm vào biến
+// KHÔNG có hoisting, phải khai báo trước khi dùng
+// Thường dùng khi cần truyền hàm như một giá trị
+
+// Ví dụ 1: Function Expression cơ bản
+const tinhHieu = function (x, y) {
+  // Hàm được gán vào biến tinhHieu
+  // Tính hiệu của 2 số
+  return x - y;
 };
+console.log("Ví dụ 1 - Hiệu 10 - 3:", tinhHieu(10, 3));
+console.log("Ví dụ 1 - Hiệu 50 - 20:", tinhHieu(50, 20));
 
-console.log("Function expression:", sayGoodbye("Bob"));
-
-// Named function expression
-const namedExpression = function greetUser(name) {
-  return `Chào ${name} từ named expression!`;
+// Ví dụ 2: Function Expression với logic phức tạp
+const kiemTraChanLe = function (so) {
+  // Kiểm tra số chẵn hay lẻ
+  if (so % 2 === 0) {
+    return `${so} là số chẵn`;
+  } else {
+    return `${so} là số lẻ`;
+  }
 };
-
-console.log("Named expression:", namedExpression("Charlie"));
+console.log("Ví dụ 2:", kiemTraChanLe(7));
+console.log("Ví dụ 2:", kiemTraChanLe(12));
 
 // ========================================
-// 3. ARROW FUNCTIONS - HÀM MŨI TÊN (ES6+)
+// 3. ARROW FUNCTION (HÀM MŨI TÊN - ES6)
 // ========================================
 
-console.log("\n=== ARROW FUNCTIONS ===");
+console.log("\n=== 3. ARROW FUNCTION ===");
 
-// Arrow function cơ bản
-const add = (a, b) => {
-  return a + b;
+// Arrow Function: cú pháp ngắn gọn hơn
+// Không có 'this' riêng, không có 'arguments'
+// Syntax: (thamSo) => { code } hoặc thamSo => giaTri
+
+// Ví dụ 1: Arrow function cơ bản
+const tinhTich = (a, b) => {
+  // Dùng dấu {} khi có nhiều dòng code
+  const ketQua = a * b;
+  return ketQua;
 };
+console.log("Ví dụ 1 - Tích 4 * 5:", tinhTich(4, 5));
+console.log("Ví dụ 1 - Tích 7 * 8:", tinhTich(7, 8));
 
-// Arrow function rút gọn (một dòng)
-const multiply = (a, b) => a * b;
-
-// Arrow function với một tham số (không cần ngoặc đơn)
-const square = (x) => x * x;
-
-// Arrow function không tham số
-const getCurrentTime = () => new Date().toLocaleTimeString();
-
-// Arrow function với object literal (cần ngoặc đơn)
-const createUser = (name, age) => ({ name, age, isActive: true });
-
-console.log("Add:", add(5, 3));
-console.log("Multiply:", multiply(4, 7));
-console.log("Square:", square(6));
-console.log("Current time:", getCurrentTime());
-console.log("Create user:", createUser("David", 25));
+// Ví dụ 2: Arrow function rút gọn (implicit return)
+const tinhBinhPhuong = (n) => n * n; // Bỏ () nếu 1 tham số, bỏ {} và return
+const tinhLapPhuong = (n) => n * n * n;
+console.log("Ví dụ 2 - Bình phương 5:", tinhBinhPhuong(5));
+console.log("Ví dụ 2 - Lập phương 3:", tinhLapPhuong(3));
 
 // ========================================
-// 4. THAM SỐ HÀM (PARAMETERS)
+// 4. THAM SỐ MẶC ĐỊNH (DEFAULT PARAMETERS)
 // ========================================
 
-console.log("\n=== THAM SỐ HÀM ===");
+console.log("\n=== 4. THAM SỐ MẶC ĐỊNH ===");
 
-// Tham số cơ bản
-function introduceBasic(name, age, city) {
-  return `Tôi là ${name}, ${age} tuổi, sống tại ${city}`;
+// Default Parameters (ES6): gán giá trị mặc định cho tham số
+// Nếu không truyền giá trị, sẽ dùng giá trị mặc định
+// Giúp tránh lỗi undefined
+
+// Ví dụ 1: Hàm với tham số mặc định
+function chaoNguoi(ten = "Khách", tuoi = 18) {
+  // Nếu không truyền ten, mặc định là "Khách"
+  // Nếu không truyền tuoi, mặc định là 18
+  return `Xin chào ${ten}, ${tuoi} tuổi`;
 }
+console.log("Ví dụ 1 - Đầy đủ tham số:", chaoNguoi("Nam", 25));
+console.log("Ví dụ 1 - Thiếu tham số:", chaoNguoi("Lan"));
+console.log("Ví dụ 1 - Không có tham số:", chaoNguoi());
 
-console.log("Basic parameters:", introduceBasic("Emma", 28, "Hanoi"));
-
-// Tham số với giá trị mặc định (Default Parameters)
-function greetWithDefault(name = "Khách", greeting = "Xin chào") {
-  return `${greeting}, ${name}!`;
-}
-
-console.log("Default param 1:", greetWithDefault());
-console.log("Default param 2:", greetWithDefault("Frank"));
-console.log("Default param 3:", greetWithDefault("Grace", "Chào bạn"));
-
-// Tham số mặc định với biểu thức
-function createMessage(text, timestamp = new Date().toLocaleString()) {
-  return `[${timestamp}] ${text}`;
-}
-
-console.log("Default with expression:", createMessage("Hello World"));
-
-// Tham số mặc định phụ thuộc vào tham số khác
-function calculateArea(width, height = width) {
-  return width * height;
-}
-
-console.log("Square area:", calculateArea(5)); // 5 * 5 = 25
-console.log("Rectangle area:", calculateArea(5, 8)); // 5 * 8 = 40
+// Ví dụ 2: Tính diện tích hình chữ nhật với chiều rộng mặc định
+const tinhDienTich = (chieuDai, chieuRong = 10) => {
+  // Mặc định chieuRong = 10 nếu không truyền
+  const dienTich = chieuDai * chieuRong;
+  return `Diện tích: ${dienTich} m²`;
+};
+console.log("Ví dụ 2 - Có 2 tham số:", tinhDienTich(5, 8));
+console.log("Ví dụ 2 - Chỉ có chiều dài:", tinhDienTich(7));
 
 // ========================================
-// 5. REST PARAMETERS - THAM SỐ CÒNG LẠI (...)
+// 5. REST PARAMETERS (THAM SỐ CÒN LẠI)
 // ========================================
 
-console.log("\n=== REST PARAMETERS ===");
+console.log("\n=== 5. REST PARAMETERS ===");
 
-// Rest parameters - thu thập tất cả tham số còn lại
-// numbers là mảng chứa mọi đối số gom bằng dấu ...
-function sum(...numbers) {
-  // reduce cộng dồn từng phần tử vào tổng, khởi tạo từ 0
-  return numbers.reduce((total, num) => total + num, 0);
+// Rest Parameters (...tenBien): nhóm các tham số còn lại thành mảng
+// Cho phép hàm nhận số lượng tham số không xác định
+// Phải đặt ở cuối danh sách tham số
+
+// Ví dụ 1: Tính tổng nhiều số
+function tongNhieuSo(...cacSo) {
+  // ...cacSo sẽ là mảng chứa tất cả tham số truyền vào
+  let tong = 0;
+  for (let so of cacSo) {
+    tong += so;
+  }
+  return tong;
 }
+console.log("Ví dụ 1 - Tổng 2 số:", tongNhieuSo(1, 2));
+console.log("Ví dụ 1 - Tổng 5 số:", tongNhieuSo(1, 2, 3, 4, 5));
+console.log("Ví dụ 1 - Tổng 7 số:", tongNhieuSo(10, 20, 30, 40, 50, 60, 70));
 
-console.log("Sum of numbers:", sum(1, 2, 3, 4, 5, 6));
-console.log("Sum with different count:", sum(10, 20));
-
-// Rest parameters kết hợp với tham số thường
-function logMessage(level, ...messages) {
-  // messages là mảng các phần nội dung cần ghép
-  console.log(`[${level}]`, messages.join(" "));
+// Ví dụ 2: Kết hợp tham số thường và rest
+function giaoVien(tenGiaoVien, ...tenHocSinh) {
+  // Tham số đầu là tên giáo viên
+  // Các tham số còn lại là danh sách học sinh
+  console.log(`Giáo viên: ${tenGiaoVien}`);
+  console.log(`Có ${tenHocSinh.length} học sinh:`);
+  tenHocSinh.forEach((hs, index) => {
+    console.log(`  ${index + 1}. ${hs}`);
+  });
+  return tenHocSinh.length;
 }
-
-logMessage("INFO", "System", "started", "successfully");
-logMessage("ERROR", "Connection", "failed");
-
-// Rest parameters với arrow function
-// Math.max cần từng đối số riêng lẻ nên dùng ...nums để trải ra
-const findMax = (...nums) => Math.max(...nums);
-console.log("Max number:", findMax(3, 7, 2, 9, 1));
+console.log(
+  "Ví dụ 2 - Số học sinh:",
+  giaoVien("Cô Lan", "An", "Bình", "Chi", "Dũng")
+);
 
 // ========================================
-// 6. ARGUMENTS OBJECT (Cách cũ)
+// 6. ARGUMENTS OBJECT (ĐỐI TƯỢNG ARGUMENTS)
 // ========================================
 
-console.log("\n=== ARGUMENTS OBJECT ===");
+console.log("\n=== 6. ARGUMENTS OBJECT ===");
 
-// Arguments object - chỉ hoạt động với function declaration/expression
-function oldStyleSum() {
-  let total = 0;
+// arguments: đối tượng giống mảng chứa tất cả tham số
+// Chỉ có trong function thông thường (KHÔNG có trong arrow function)
+// Không phải mảng thực sự, không có các method như map, filter
+
+// Ví dụ 1: Sử dụng arguments để tính tổng
+function tinhTongArguments() {
+  // arguments chứa tất cả tham số được truyền vào
+  console.log("  Type của arguments:", typeof arguments);
+  console.log("  Có phải Array?", Array.isArray(arguments));
+
+  let tong = 0;
   for (let i = 0; i < arguments.length; i++) {
-    // arguments là đối tượng dạng mảng chứa toàn bộ tham số truyền vào
-    total += arguments[i];
+    tong += arguments[i];
   }
-  return total;
+  return tong;
+}
+console.log("Ví dụ 1 - Tổng:", tinhTongArguments(5, 10, 15, 20));
+
+// Ví dụ 2: Chuyển arguments thành mảng thực
+function xuLyArguments() {
+  // Cách 1: Dùng Array.from()
+  const mang1 = Array.from(arguments);
+  console.log("  Cách 1 - Array.from():", mang1);
+
+  // Cách 2: Dùng spread operator
+  const mang2 = [...arguments];
+  console.log("  Cách 2 - Spread:", mang2);
+
+  // Bây giờ có thể dùng các method của Array
+  const ketQua = mang2.map((x) => x * 2);
+  return ketQua;
+}
+console.log("Ví dụ 2 - Nhân đôi:", xuLyArguments(1, 2, 3, 4));
+
+// ========================================
+// 7. CALLBACK FUNCTION (HÀM GỌI LẠI)
+// ========================================
+
+console.log("\n=== 7. CALLBACK FUNCTION ===");
+
+// Callback: hàm được truyền như tham số vào hàm khác
+// Hàm nhận callback sẽ gọi (execute) callback đó
+// Rất phổ biến trong lập trình bất đồng bộ
+
+// Ví dụ 1: Callback đơn giản
+function thucHienPhepTinh(a, b, callback) {
+  // Hàm này nhận 2 số và 1 callback function
+  const ketQua = callback(a, b);
+  console.log(`  Kết quả: ${ketQua}`);
+  return ketQua;
 }
 
-console.log("Arguments object sum:", oldStyleSum(1, 2, 3, 4));
+// Các callback khác nhau cho các phép tính khác nhau
+const phepCong = (x, y) => x + y;
+const phepNhan = (x, y) => x * y;
 
-// Chuyển arguments thành array
-function argumentsToArray() {
-  // Array.from giúp biến arguments thành mảng thực sự để thao tác linh hoạt
-  const argsArray = Array.from(arguments);
-  console.log("Arguments as array:", argsArray);
-  return argsArray;
-}
+console.log("Ví dụ 1 - Phép cộng:");
+thucHienPhepTinh(5, 3, phepCong);
 
-argumentsToArray("a", "b", "c");
+console.log("Ví dụ 1 - Phép nhân:");
+thucHienPhepTinh(5, 3, phepNhan);
 
-// Lưu ý: Arrow functions không có arguments object
-const arrowWithArgs = () => {
-  try {
-    // Arrow function không sở hữu arguments nên truy cập sẽ lỗi
-    console.log(arguments); // ❌ ReferenceError
-  } catch (error) {
-    console.log("Arrow functions don't have arguments object");
+// Ví dụ 2: Callback với xử lý mảng
+function xuLyMang(mang, callbackXuLy) {
+  // Duyệt qua từng phần tử và áp dụng callback
+  const ketQua = [];
+  for (let i = 0; i < mang.length; i++) {
+    const phanTuMoi = callbackXuLy(mang[i], i);
+    ketQua.push(phanTuMoi);
   }
-};
-arrowWithArgs();
-
-// ========================================
-// 7. DESTRUCTURING PARAMETERS - THAM SỐ PHÂN RÃ
-// ========================================
-
-console.log("\n=== DESTRUCTURING PARAMETERS ===");
-
-// Object destructuring parameters
-function processUser({ name, age, email = "N/A" }) {
-  return `User: ${name}, Age: ${age}, Email: ${email}`;
+  return ketQua;
 }
 
-const userData = { name: "Helen", age: 30, city: "Saigon" };
-console.log("Object destructuring:", processUser(userData));
-
-// Array destructuring parameters
-function calculateDistance([x1, y1], [x2, y2]) {
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  return Math.sqrt(dx * dx + dy * dy);
-}
-
-console.log("Distance:", calculateDistance([0, 0], [3, 4])); // 5
-
-// Nested destructuring
-function displayAddress({
-  name,
-  address: { street, city, zipCode = "Unknown" },
-}) {
-  return `${name} lives at ${street}, ${city} ${zipCode}`;
-}
-
-const personData = {
-  name: "Ivan",
-  address: {
-    street: "123 Main St",
-    city: "Hanoi",
-  },
-};
-
-console.log("Nested destructuring:", displayAddress(personData));
-
-// ========================================
-// 8. CALLBACK FUNCTIONS - HÀM CALLBACK
-// ========================================
-
-console.log("\n=== CALLBACK FUNCTIONS ===");
-
-// Callback function cơ bản
-function processArray(arr, callback) {
-  const result = [];
-  for (let item of arr) {
-    result.push(callback(item));
-  }
-  return result;
-}
-
-const numbers = [1, 2, 3, 4, 5];
-const doubled = processArray(numbers, (x) => x * 2);
-const squared = processArray(numbers, (x) => x * x);
-
-console.log("Original:", numbers);
-console.log("Doubled:", doubled);
-console.log("Squared:", squared);
-
-// Callback với multiple parameters
-function calculator(a, b, operation) {
-  return operation(a, b);
-}
-
+const soGoc = [1, 2, 3, 4, 5];
+console.log("Ví dụ 2 - Mảng gốc:", soGoc);
 console.log(
-  "Addition:",
-  calculator(10, 5, (x, y) => x + y)
+  "Ví dụ 2 - Nhân 3:",
+  xuLyMang(soGoc, (x) => x * 3)
 );
 console.log(
-  "Subtraction:",
-  calculator(10, 5, (x, y) => x - y)
-);
-console.log(
-  "Multiplication:",
-  calculator(10, 5, (x, y) => x * y)
+  "Ví dụ 2 - Bình phương:",
+  xuLyMang(soGoc, (x) => x * x)
 );
 
-// Async callback simulation
-function fetchData(callback) {
-  setTimeout(() => {
-    const data = { id: 1, name: "Sample Data" };
-    callback(data);
-  }, 1000);
-}
-
-console.log("Fetching data...");
-fetchData((data) => {
-  console.log("Data received:", data);
-});
-
 // ========================================
-// 9. HIGHER-ORDER FUNCTIONS - HÀM BẬC CAO
+// 8. HIGHER-ORDER FUNCTION (HÀM BẬC CAO)
 // ========================================
 
-console.log("\n=== HIGHER-ORDER FUNCTIONS ===");
+console.log("\n=== 8. HIGHER-ORDER FUNCTION ===");
 
-// Hàm trả về hàm khác
-function createMultiplier(factor) {
-  return function (number) {
-    return number * factor;
+// Higher-Order Function: hàm nhận hàm khác làm tham số
+// hoặc trả về một hàm khác
+// Giúp code linh hoạt, dễ tái sử dụng
+
+// Ví dụ 1: Hàm trả về hàm khác (Function Factory)
+function taoHamNhan(soNhan) {
+  // Trả về một hàm mới
+  // Hàm mới này sẽ nhân số đầu vào với soNhan
+  return function (soCanNhan) {
+    return soCanNhan * soNhan;
   };
 }
 
-const double = createMultiplier(2);
-const triple = createMultiplier(3);
+const nhanVoi2 = taoHamNhan(2);
+const nhanVoi5 = taoHamNhan(5);
+console.log("Ví dụ 1 - Nhân 10 với 2:", nhanVoi2(10));
+console.log("Ví dụ 1 - Nhân 10 với 5:", nhanVoi5(10));
 
-console.log("Double 7:", double(7));
-console.log("Triple 5:", triple(5));
-
-// Hàm nhận hàm làm tham số và trả về hàm
-function withLogging(func) {
+// Ví dụ 2: Hàm nhận và trả về hàm
+function taoHamLapLai(fn, soLan) {
+  // Trả về hàm mới thực thi fn nhiều lần
   return function (...args) {
-    console.log(`Calling function with args:`, args);
-    const result = func(...args);
-    console.log(`Function returned:`, result);
-    return result;
+    let ketQuaCuoi;
+    for (let i = 0; i < soLan; i++) {
+      ketQuaCuoi = fn(...args);
+      console.log(`  Lần ${i + 1}:`, ketQuaCuoi);
+    }
+    return ketQuaCuoi;
   };
 }
 
-const loggedAdd = withLogging((a, b) => a + b);
-loggedAdd(3, 4);
+const hamChao = (ten) => `Chào ${ten}!`;
+const chao3Lan = taoHamLapLai(hamChao, 3);
+console.log("Ví dụ 2 - Lặp 3 lần:");
+chao3Lan("Nam");
 
-// Currying - Hàm trả về hàm liên tiếp
-function curriedAdd(a) {
+// ========================================
+// 9. CLOSURE (BẢO ĐÓNG)
+// ========================================
+
+console.log("\n=== 9. CLOSURE ===");
+
+// Closure: hàm bên trong có thể truy cập biến của hàm bên ngoài
+// Ngay cả sau khi hàm bên ngoài đã thực thi xong
+// Giúp tạo private variables và data encapsulation
+
+// Ví dụ 1: Closure cơ bản với counter
+function taoBoDeM() {
+  // Biến count là private, chỉ truy cập qua các hàm bên trong
+  let count = 0;
+
+  return {
+    tang: function () {
+      count++;
+      return count;
+    },
+    giam: function () {
+      count--;
+      return count;
+    },
+    layGiaTri: function () {
+      return count;
+    },
+  };
+}
+
+const counter1 = taoBoDeM();
+const counter2 = taoBoDeM(); // Counter độc lập
+console.log("Ví dụ 1 - Counter 1 tăng:", counter1.tang());
+console.log("Ví dụ 1 - Counter 1 tăng:", counter1.tang());
+console.log("Ví dụ 1 - Counter 2 tăng:", counter2.tang());
+console.log("Ví dụ 1 - Counter 1 giảm:", counter1.giam());
+console.log("Ví dụ 1 - Counter 1 giá trị:", counter1.layGiaTri());
+
+// Ví dụ 2: Closure với tính toán
+function taoMayTinhCaNhan() {
+  // Mỗi máy tính có bộ nhớ riêng
+  let boNho = 0;
+
+  return {
+    cong: function (so) {
+      boNho += so;
+      return `Cộng ${so}, kết quả: ${boNho}`;
+    },
+    nhan: function (so) {
+      boNho *= so;
+      return `Nhân ${so}, kết quả: ${boNho}`;
+    },
+    xoaBoNho: function () {
+      boNho = 0;
+      return "Đã xóa bộ nhớ";
+    },
+  };
+}
+
+const mayTinh = taoMayTinhCaNhan();
+console.log("Ví dụ 2 -", mayTinh.cong(5));
+console.log("Ví dụ 2 -", mayTinh.cong(3));
+console.log("Ví dụ 2 -", mayTinh.nhan(2));
+console.log("Ví dụ 2 -", mayTinh.xoaBoNho());
+
+// ========================================
+// 10. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSION)
+// ========================================
+
+console.log("\n=== 10. IIFE ===");
+
+// IIFE: hàm tự gọi ngay sau khi khai báo
+// Tạo scope riêng, tránh ô nhiễm global scope
+// Syntax: (function() { code })() hoặc (() => { code })()
+
+// Ví dụ 1: IIFE cơ bản
+(function () {
+  // Hàm này chạy ngay lập tức
+  const message = "Đây là IIFE!";
+  console.log("Ví dụ 1 -", message);
+  console.log("Ví dụ 1 - Hàm tự động chạy không cần gọi");
+})();
+
+// Ví dụ 2: IIFE với tham số và return
+const ketQuaTinhToan = (function (a, b) {
+  // IIFE có thể nhận tham số
+  const tong = a + b;
+  const tich = a * b;
+  console.log(`Ví dụ 2 - Tổng ${a} + ${b} = ${tong}`);
+  console.log(`Ví dụ 2 - Tích ${a} * ${b} = ${tich}`);
+  // Trả về kết quả để gán vào biến
+  return { tong, tich };
+})(10, 5); // Truyền tham số ngay khi gọi
+
+console.log("Ví dụ 2 - Kết quả:", ketQuaTinhToan);
+
+// ========================================
+// 11. DESTRUCTURING PARAMETERS (THAM SỐ PHÂN RÃ)
+// ========================================
+
+console.log("\n=== 11. DESTRUCTURING PARAMETERS ===");
+
+// Destructuring Parameters: phân rã object/array ngay trong tham số
+// Giúp code ngắn gọn, dễ đọc hơn
+// Có thể kết hợp với default values
+
+// Ví dụ 1: Destructuring object parameters
+function thongTinNguoiDung({ ten, tuoi, ngheNghiep = "Chưa rõ" }) {
+  // Phân rã object ngay trong tham số
+  // ngheNghiep có giá trị mặc định
+  return `${ten}, ${tuoi} tuổi, nghề: ${ngheNghiep}`;
+}
+
+const user1 = { ten: "Nam", tuoi: 25, ngheNghiep: "Lập trình viên" };
+const user2 = { ten: "Lan", tuoi: 22 }; // Không có ngheNghiep
+console.log("Ví dụ 1 - User 1:", thongTinNguoiDung(user1));
+console.log("Ví dụ 1 - User 2:", thongTinNguoiDung(user2));
+
+// Ví dụ 2: Destructuring array parameters
+function tinhToanToa([x1, y1], [x2, y2]) {
+  // Phân rã 2 mảng toạ độ
+  const khoangCach = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  console.log(`  Điểm 1: (${x1}, ${y1})`);
+  console.log(`  Điểm 2: (${x2}, ${y2})`);
+  return khoangCach.toFixed(2);
+}
+
+console.log("Ví dụ 2 - Khoảng cách:", tinhToanToa([0, 0], [3, 4]), "đơn vị");
+
+// ========================================
+// 12. NAMED PARAMETERS (THAM SỐ ĐẶT TÊN)
+// ========================================
+
+console.log("\n=== 12. NAMED PARAMETERS ===");
+
+// Named Parameters: dùng object để truyền tham số
+// Không phụ thuộc vào thứ tự tham số
+// Dễ đọc, dễ bảo trì khi có nhiều tham số
+
+// Ví dụ 1: So sánh tham số thông thường và named parameters
+function taoTaiKhoan1(username, password, email, age, role) {
+  // Khó nhớ thứ tự, dễ nhầm lẫn
+  return { username, password, email, age, role };
+}
+
+function taoTaiKhoan2({ username, password, email, age, role }) {
+  // Rõ ràng hơn, không quan tâm thứ tự
+  return { username, password, email, age, role };
+}
+
+console.log("Ví dụ 1 - Cách cũ:");
+console.log(taoTaiKhoan1("user123", "pass123", "user@mail.com", 25, "user"));
+
+console.log("Ví dụ 1 - Named parameters:");
+console.log(
+  taoTaiKhoan2({
+    role: "admin",
+    email: "admin@mail.com",
+    username: "admin123",
+    age: 30,
+    password: "admin123",
+  })
+);
+
+// Ví dụ 2: Named parameters với giá trị mặc định
+function cauHinhHeThong({
+  theme = "light",
+  language = "vi",
+  fontSize = 14,
+  autoSave = true,
+} = {}) {
+  // Mặc định là object rỗng nếu không truyền gì
+  console.log("  Cấu hình hệ thống:");
+  console.log(`  - Chủ đề: ${theme}`);
+  console.log(`  - Ngôn ngữ: ${language}`);
+  console.log(`  - Cỡ chữ: ${fontSize}px`);
+  console.log(`  - Tự động lưu: ${autoSave ? "Có" : "Không"}`);
+  return { theme, language, fontSize, autoSave };
+}
+
+console.log("Ví dụ 2 - Cấu hình tùy chỉnh:");
+cauHinhHeThong({ theme: "dark", fontSize: 16 });
+
+console.log("Ví dụ 2 - Dùng mặc định:");
+cauHinhHeThong();
+
+// ========================================
+// 13. PURE FUNCTION (HÀM THUẦN TÚY)
+// ========================================
+
+console.log("\n=== 13. PURE FUNCTION ===");
+
+// Pure Function: hàm không có side effects (tác dụng phụ)
+// - Luôn trả về cùng kết quả với cùng input
+// - Không thay đổi biến bên ngoài
+// - Dễ test, dễ debug, dễ tái sử dụng
+
+// Ví dụ 1: So sánh Pure và Impure Function
+let tongToanCuc = 0; // Biến global
+
+// Impure Function: thay đổi biến bên ngoài
+function impureTong(so) {
+  tongToanCuc += so; // Side effect: thay đổi biến global
+  return tongToanCuc;
+}
+
+// Pure Function: không thay đổi gì bên ngoài
+function pureTong(tongHienTai, so) {
+  return tongHienTai + so; // Chỉ tính toán và trả về
+}
+
+console.log("Ví dụ 1 - Impure function:");
+console.log("  Lần 1:", impureTong(5)); // 5
+console.log("  Lần 2:", impureTong(5)); // 10 (khác nhau!)
+console.log("  Biến global:", tongToanCuc);
+
+console.log("Ví dụ 1 - Pure function:");
+console.log("  Lần 1:", pureTong(0, 5)); // 5
+console.log("  Lần 2:", pureTong(0, 5)); // 5 (giống nhau)
+console.log("  Lần 3:", pureTong(10, 5)); // 15
+
+// Ví dụ 2: Pure function với object
+const nguoiDungGoc = { ten: "Nam", tuoi: 25 };
+
+// Impure: thay đổi object gốc
+function impureCapNhat(obj, tuoiMoi) {
+  obj.tuoi = tuoiMoi; // Mutate object
+  return obj;
+}
+
+// Pure: tạo object mới
+function pureCapNhat(obj, tuoiMoi) {
+  return { ...obj, tuoi: tuoiMoi }; // Tạo bản sao mới
+}
+
+console.log("Ví dụ 2 - Object gốc:", nguoiDungGoc);
+const nguoiDungMoi = pureCapNhat(nguoiDungGoc, 30);
+console.log("Ví dụ 2 - Object mới:", nguoiDungMoi);
+console.log("Ví dụ 2 - Object gốc không đổi:", nguoiDungGoc);
+
+// ========================================
+// 14. CURRYING (HÀM KARI)
+// ========================================
+
+console.log("\n=== 14. CURRYING ===");
+
+// Currying: chuyển hàm nhiều tham số thành chuỗi hàm 1 tham số
+// f(a, b, c) => f(a)(b)(c)
+// Giúp tạo các hàm chuyên biệt từ hàm tổng quát
+
+// Ví dụ 1: Currying cơ bản
+// Hàm thông thường
+function tongBinhThuong(a, b, c) {
+  return a + b + c;
+}
+
+// Hàm currying
+function tongCurry(a) {
   return function (b) {
     return function (c) {
       return a + b + c;
@@ -315,560 +553,408 @@ function curriedAdd(a) {
   };
 }
 
-// Arrow function currying
-const curriedMultiply = (a) => (b) => (c) => a * b * c;
+// Cách gọi khác nhau
+console.log("Ví dụ 1 - Bình thường:", tongBinhThuong(1, 2, 3));
+console.log("Ví dụ 1 - Currying:", tongCurry(1)(2)(3));
 
-console.log("Curried add:", curriedAdd(1)(2)(3));
-console.log("Curried multiply:", curriedMultiply(2)(3)(4));
+// Lợi ích: tạo hàm chuyên biệt
+const cong1 = tongCurry(1);
+const cong1Va2 = cong1(2);
+console.log("Ví dụ 1 - Hàm chuyên biệt:", cong1Va2(3));
 
-// ========================================
-// 10. CLOSURE - BAO ĐÓNG
-// Closure là khả năng của một hàm trong JavaScript khi ghi nhớ và truy cập các biến từ phạm vi bên ngoài hàm đó, ngay cả khi hàm bên ngoài đã hoàn thành thực thi.
-// ========================================
+// Ví dụ 2: Currying thực tế với arrow function
+const nhanSo = (a) => (b) => (c) => a * b * c;
 
-console.log("\n=== CLOSURE ===");
+console.log("Ví dụ 2 - Nhân 3 số:", nhanSo(2)(3)(4));
 
-// Closure cơ bản
-function createCounter() {
-  let count = 0;
-
-  return function () {
-    count++;
-    return count;
-  };
-}
-
-const counter1 = createCounter();
-const counter2 = createCounter();
-
-console.log("Counter1:", counter1()); // 1
-console.log("Counter1:", counter1()); // 2
-console.log("Counter2:", counter2()); // 1
-console.log("Counter1:", counter1()); // 3
-
-// Closure với private variables
-function createBankAccount(initialBalance) {
-  let balance = initialBalance;
-
-  return {
-    deposit: function (amount) {
-      balance += amount;
-      return balance;
-    },
-    withdraw: function (amount) {
-      if (amount <= balance) {
-        balance -= amount;
-        return balance;
-      } else {
-        return "Insufficient funds";
-      }
-    },
-    getBalance: function () {
-      return balance;
-    },
-  };
-}
-
-const account = createBankAccount(100);
-console.log("Initial balance:", account.getBalance());
-console.log("After deposit 50:", account.deposit(50));
-console.log("After withdraw 30:", account.withdraw(30));
-console.log("Try withdraw 200:", account.withdraw(200));
+// Tạo các hàm nhân với số cố định
+const nhanVoi10 = nhanSo(10);
+const nhanVoi10Va2 = nhanVoi10(2);
+console.log("Ví dụ 2 - 10 * 2 * 5:", nhanVoi10Va2(5));
 
 // ========================================
-// 11. IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)
+// 15. RECURSION (ĐỆ QUY)
 // ========================================
 
-console.log("\n=== IIFE ===");
+console.log("\n=== 15. RECURSION ===");
 
-// IIFE cơ bản
-(function () {
-  console.log("IIFE executed immediately!");
-})();
+// Recursion: hàm tự gọi chính nó
+// Cần có điều kiện dừng (base case) để tránh vòng lặp vô hạn
+// Hữu ích cho các bài toán có cấu trúc lặp lại
 
-// IIFE với parameters
-(function (name, version) {
-  console.log(`App: ${name}, Version: ${version}`);
-})("MyApp", "1.0.0");
-
-// IIFE trả về giá trị
-const result = (function (x, y) {
-  return x * y + 10;
-})(5, 6);
-
-console.log("IIFE result:", result);
-
-// IIFE với arrow function
-((name) => {
-  console.log(`Arrow IIFE: Hello ${name}`);
-})("World");
-
-// ========================================
-// 12. FUNCTION METHODS - CALL, APPLY, BIND
-// ========================================
-
-console.log("\n=== FUNCTION METHODS ===");
-
-const person1 = { name: "John", age: 30 };
-const person2 = { name: "Jane", age: 25 };
-
-function introduce(greeting, punctuation) {
-  return `${greeting}, I'm ${this.name}, ${this.age} years old${punctuation}`;
-}
-
-// Call method - truyền từng argument riêng lẻ
-console.log("Call method:", introduce.call(person1, "Hello", "!"));
-console.log("Call method:", introduce.call(person2, "Hi", "."));
-
-// Apply method - truyền arguments dưới dạng array
-console.log("Apply method:", introduce.apply(person1, ["Greetings", "!!!"]));
-
-// Bind method - tạo hàm mới với this đã được bind
-const boundIntroduce = introduce.bind(person2);
-console.log("Bind method:", boundIntroduce("Hey", "~"));
-
-// Bind với partial application
-const sayHi = introduce.bind(person1, "Hi");
-console.log("Partial bind:", sayHi("!"));
-
-// ========================================
-// 13. RECURSION - ĐỆ QUY
-// ========================================
-
-console.log("\n=== RECURSION ===");
-
-// Factorial recursion
-function factorial(n) {
-  // Base case
-  if (n <= 1) {
+// Ví dụ 1: Tính giai thừa (factorial)
+function giaiThua(n) {
+  // Base case: điều kiện dừng
+  if (n === 0 || n === 1) {
     return 1;
   }
-  // Recursive case
-  return n * factorial(n - 1);
+  // Recursive case: gọi lại chính nó
+  console.log(`  Tính ${n}! = ${n} * ${n - 1}!`);
+  return n * giaiThua(n - 1);
 }
 
-console.log("Factorial 5:", factorial(5));
+console.log("Ví dụ 1 - Giai thừa 5:");
+console.log("Kết quả:", giaiThua(5));
 
-// Fibonacci recursion
+// Ví dụ 2: Dãy Fibonacci
 function fibonacci(n) {
-  if (n <= 1) {
-    return n;
-  }
+  // Dãy Fibonacci: 0, 1, 1, 2, 3, 5, 8, 13...
+  // f(n) = f(n-1) + f(n-2)
+
+  // Base cases
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  // Recursive case
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-console.log("Fibonacci sequence:");
-for (let i = 0; i <= 7; i++) {
-  console.log(`F(${i}) = ${fibonacci(i)}`);
+console.log("Ví dụ 2 - Dãy Fibonacci 10 số đầu:");
+for (let i = 0; i < 10; i++) {
+  console.log(`  f(${i}) = ${fibonacci(i)}`);
 }
-
-// Countdown recursion
-function countdown(n) {
-  console.log(n);
-  if (n > 0) {
-    countdown(n - 1);
-  } else {
-    console.log("Blast off! 🚀");
-  }
-}
-
-console.log("Countdown from 5:");
-countdown(5);
-
-// Tree traversal recursion
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        { value: 4, children: [] },
-        { value: 5, children: [] },
-      ],
-    },
-    {
-      value: 3,
-      children: [{ value: 6, children: [] }],
-    },
-  ],
-};
-
-function traverseTree(node, depth = 0) {
-  const indent = "  ".repeat(depth);
-  console.log(`${indent}Node: ${node.value}`);
-
-  node.children.forEach((child) => {
-    traverseTree(child, depth + 1);
-  });
-}
-
-console.log("Tree traversal:");
-traverseTree(tree);
 
 // ========================================
-// 14. FUNCTION SCOPE VÀ THIS
+// 16. MEMOIZATION (GHI NHỚ KẾT QUẢ)
 // ========================================
 
-console.log("\n=== FUNCTION SCOPE VÀ THIS ===");
+console.log("\n=== 16. MEMOIZATION ===");
 
-// Global scope
-var globalVar = "I'm global";
+// Memoization: lưu kết quả đã tính để tái sử dụng
+// Tránh tính toán lại với cùng input
+// Tối ưu hiệu năng, đặc biệt với recursion
 
-function outerFunction() {
-  var outerVar = "I'm in outer function";
+// Ví dụ 1: Fibonacci với memoization
+function fibonacciMemo() {
+  const cache = {}; // Lưu kết quả đã tính
 
-  function innerFunction() {
-    var innerVar = "I'm in inner function";
-    console.log("Inner can access:", { globalVar, outerVar, innerVar });
-  }
-
-  innerFunction();
-  // console.log(innerVar); // ❌ ReferenceError
-}
-
-outerFunction();
-
-// This trong different contexts
-const obj = {
-  name: "Object Method",
-  regularFunction: function () {
-    console.log("Regular function this:", this.name);
-  },
-  arrowFunction: () => {
-    console.log("Arrow function this:", this.name); // undefined hoặc global
-  },
-  nestedExample: function () {
-    console.log("Outer this:", this.name);
-
-    // Regular function trong method
-    function inner() {
-      console.log("Inner regular this:", this.name); // undefined
+  return function fib(n) {
+    // Kiểm tra cache trước
+    if (n in cache) {
+      console.log(`  Lấy từ cache: fib(${n}) = ${cache[n]}`);
+      return cache[n];
     }
 
-    // Arrow function trong method
-    const innerArrow = () => {
-      console.log("Inner arrow this:", this.name); // "Object Method"
-    };
+    // Base cases
+    if (n === 0) return 0;
+    if (n === 1) return 1;
 
-    inner();
-    innerArrow();
-  },
-};
-
-obj.regularFunction();
-obj.arrowFunction();
-obj.nestedExample();
-
-// ========================================
-// 15. GENERATOR FUNCTIONS - HÀM SINH
-// ========================================
-
-console.log("\n=== GENERATOR FUNCTIONS ===");
-
-// Generator function cơ bản
-function* simpleGenerator() {
-  console.log("Generator started");
-  yield 1;
-  console.log("After first yield");
-  yield 2;
-  console.log("After second yield");
-  yield 3;
-  console.log("Generator finished");
+    // Tính và lưu vào cache
+    console.log(`  Tính mới: fib(${n})`);
+    cache[n] = fib(n - 1) + fib(n - 2);
+    return cache[n];
+  };
 }
 
-const gen = simpleGenerator();
-console.log("Generator next 1:", gen.next());
-console.log("Generator next 2:", gen.next());
-console.log("Generator next 3:", gen.next());
-console.log("Generator next 4:", gen.next());
+const fibMemo = fibonacciMemo();
+console.log("Ví dụ 1 - Fibonacci với memoization:");
+console.log("Lần 1 - fib(8):", fibMemo(8));
+console.log("Lần 2 - fib(8):", fibMemo(8)); // Nhanh hơn nhiều!
 
-// Generator với infinite sequence
-function* infiniteCounter() {
-  let count = 0;
-  while (true) {
-    yield count++;
-  }
-}
-
-const counter = infiniteCounter();
-console.log("Infinite counter:");
-for (let i = 0; i < 5; i++) {
-  console.log(counter.next().value);
-}
-
-// Generator với yield*
-function* innerGenerator() {
-  yield "a";
-  yield "b";
-}
-
-function* outerGenerator() {
-  yield 1;
-  yield* innerGenerator();
-  yield 2;
-}
-
-console.log("Generator with yield*:");
-for (const value of outerGenerator()) {
-  console.log(value);
-}
-
-// ========================================
-// 16. ASYNC/AWAIT VÀ PROMISES
-// ========================================
-
-console.log("\n=== ASYNC/AWAIT VÀ PROMISES ===");
-
-// Promise-based function
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-// Async function
-async function asyncExample() {
-  console.log("Async function started");
-
-  await delay(1000);
-  console.log("After 1 second delay");
-
-  return "Async function completed";
-}
-
-// Using async function
-asyncExample().then((result) => {
-  console.log("Async result:", result);
-});
-
-// Error handling in async functions
-async function asyncWithError() {
-  try {
-    await delay(500);
-    throw new Error("Something went wrong!");
-  } catch (error) {
-    console.log("Caught error:", error.message);
-    return "Error handled";
-  }
-}
-
-asyncWithError().then((result) => {
-  console.log("Error handling result:", result);
-});
-
-// ========================================
-// 17. FUNCTION COMPOSITION
-// ========================================
-
-console.log("\n=== FUNCTION COMPOSITION ===");
-
-// Simple function composition
-const addOne = (x) => x + 1;
-const multiplyByTwo = (x) => x * 2;
-const squareNum = (x) => x * x;
-
-// Manual composition
-const compose = (f, g) => (x) => f(g(x));
-const addOneThenDouble = compose(multiplyByTwo, addOne);
-
-console.log("Compose example:", addOneThenDouble(3)); // (3 + 1) * 2 = 8
-
-// Multiple function composition
-const pipe =
-  (...functions) =>
-  (value) =>
-    functions.reduce((acc, fn) => fn(acc), value);
-
-const pipeline = pipe(addOne, multiplyByTwo, squareNum);
-console.log("Pipeline example:", pipeline(2)); // ((2 + 1) * 2)² = 36
-
-// ========================================
-// 18. MEMOIZATION - GHI NHỚ KẾT QUẢ
-// ========================================
-
-console.log("\n=== MEMOIZATION ===");
-
-// Memoization decorator
+// Ví dụ 2: Memoization tổng quát
 function memoize(fn) {
-  const cache = new Map();
+  // Hàm tạo memoized version của bất kỳ hàm nào
+  const cache = {};
 
   return function (...args) {
     const key = JSON.stringify(args);
 
-    if (cache.has(key)) {
-      console.log("Cache hit for", args);
-      return cache.get(key);
+    if (key in cache) {
+      console.log(`  Cache hit: ${key}`);
+      return cache[key];
     }
 
-    console.log("Computing for", args);
-    const result = fn.apply(this, args);
-    cache.set(key, result);
+    console.log(`  Cache miss: ${key}`);
+    const result = fn(...args);
+    cache[key] = result;
     return result;
   };
 }
 
-// Memoized fibonacci
-const memoizedFib = memoize(function (n) {
-  if (n <= 1) return n;
-  return memoizedFib(n - 1) + memoizedFib(n - 2);
-});
-
-console.log("Memoized Fibonacci:");
-console.log("fib(10):", memoizedFib(10));
-console.log("fib(10) again:", memoizedFib(10)); // Should use cache
-
-// ========================================
-// 19. BEST PRACTICES
-// ========================================
-
-console.log("\n=== BEST PRACTICES ===");
-
-// 1. Sử dụng tên hàm có ý nghĩa
-function calculateTotalPrice(items, taxRate) {
-  return items.reduce((total, item) => total + item.price, 0) * (1 + taxRate);
-}
-
-// 2. Keep functions small and focused
-function validateEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-// 3. Use pure functions when possible
-function formatCurrency(amount, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currency,
-  }).format(amount);
-}
-
-// 4. Error handling
-function safeDivide(a, b) {
-  if (b === 0) {
-    throw new Error("Division by zero is not allowed");
+// Áp dụng memoization cho hàm tính tổng
+const tinhTongCham = (a, b, c) => {
+  // Giả lập tính toán phức tạp
+  let sum = 0;
+  for (let i = 0; i < 1000000; i++) {
+    sum = a + b + c;
   }
-  return a / b;
-}
-
-// 5. Documentation with JSDoc
-/**
- * Calculates the area of a circle
- * @param {number} radius - The radius of the circle
- * @returns {number} The area of the circle
- */
-function calculateCircleArea(radius) {
-  if (radius < 0) {
-    throw new Error("Radius cannot be negative");
-  }
-  return Math.PI * radius * radius;
-}
-
-console.log("Best practices examples:");
-console.log(
-  "Total price:",
-  calculateTotalPrice([{ price: 10 }, { price: 20 }], 0.1)
-);
-console.log("Email valid:", validateEmail("test@example.com"));
-console.log("Currency:", formatCurrency(1234.56));
-console.log("Circle area:", calculateCircleArea(5));
-
-// ========================================
-// 20. TÓM TẮT VÀ SO SÁNH
-// ========================================
-
-console.log("\n=== TÓM TẮT VÀ SO SÁNH ===");
-
-const functionComparison = {
-  "Function Declaration": {
-    Hoisting: "✅ Yes",
-    "this binding": "Dynamic",
-    "arguments object": "✅ Yes",
-    Syntax: "function name() {}",
-  },
-  "Function Expression": {
-    Hoisting: "❌ No",
-    "this binding": "Dynamic",
-    "arguments object": "✅ Yes",
-    Syntax: "const name = function() {}",
-  },
-  "Arrow Function": {
-    Hoisting: "❌ No",
-    "this binding": "Lexical (inherited)",
-    "arguments object": "❌ No",
-    Syntax: "const name = () => {}",
-  },
+  return sum;
 };
 
-console.table(functionComparison);
-
-console.log("\n🎉 Hoàn thành bài học về Hàm và Tham số trong JavaScript!");
+const tinhTongNhanh = memoize(tinhTongCham);
+console.log("Ví dụ 2 - Lần 1:", tinhTongNhanh(1, 2, 3));
+console.log("Ví dụ 2 - Lần 2 (nhanh hơn):", tinhTongNhanh(1, 2, 3));
 
 // ========================================
-// 21. BÀI TẬP THỰC HÀNH
+// 17. FUNCTION COMPOSITION (KẾT HỢP HÀM)
 // ========================================
 
-console.log("\n=== BÀI TẬP THỰC HÀNH ===");
+console.log("\n=== 17. FUNCTION COMPOSITION ===");
 
-// Bài tập 1: Tạo calculator với closure
-function createCalculator() {
-  let result = 0;
+// Function Composition: kết hợp nhiều hàm thành một
+// Kết quả của hàm này là input của hàm khác
+// compose(f, g)(x) = f(g(x))
 
-  return {
-    add: (num) => {
-      result += num;
-      return result;
-    },
-    subtract: (num) => {
-      result -= num;
-      return result;
-    },
-    multiply: (num) => {
-      result *= num;
-      return result;
-    },
-    divide: (num) => {
-      if (num !== 0) result /= num;
-      return result;
-    },
-    clear: () => {
-      result = 0;
-      return result;
-    },
-    getResult: () => result,
-  };
-}
+// Ví dụ 1: Composition thủ công
+const themHai = (x) => x + 2;
+const nhanHai = (x) => x * 2;
+const binhPhuong = (x) => x * x;
 
-const calc = createCalculator();
-console.log("Calculator test:");
-console.log("Add 10:", calc.add(10));
-console.log("Multiply by 2:", calc.multiply(2));
-console.log("Subtract 5:", calc.subtract(5));
+// Thực hiện tuần tự
+const ketQua1 = themHai(5); // 7
+const ketQua2 = nhanHai(ketQua1); // 14
+const ketQua3 = binhPhuong(ketQua2); // 196
 
-// Bài tập 2: Function pipeline
-const processText = pipe(
-  (text) => text.toLowerCase(),
-  (text) => text.trim(),
-  (text) => text.split(" "),
-  (words) => words.filter((word) => word.length > 2),
-  (words) => words.join("-")
+console.log("Ví dụ 1 - Từng bước:", ketQua3);
+
+// Composition tự động
+const compose =
+  (...fns) =>
+  (x) =>
+    fns.reduceRight((v, f) => f(v), x);
+const xuLyPhucTap = compose(binhPhuong, nhanHai, themHai);
+
+console.log("Ví dụ 1 - Composition:", xuLyPhucTap(5));
+
+// Ví dụ 2: Pipe (ngược lại với compose)
+const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((v, f) => f(v), x);
+
+// Pipe: thực hiện từ trái qua phải (dễ đọc hơn)
+const xuLyTheoPipe = pipe(
+  themHai, // Bước 1: +2
+  nhanHai, // Bước 2: *2
+  binhPhuong // Bước 3: ^2
 );
 
-console.log("Text processing:", processText("  Hello Beautiful World  "));
+console.log("Ví dụ 2 - Pipe (5):", xuLyTheoPipe(5));
+console.log("Ví dụ 2 - Pipe (10):", xuLyTheoPipe(10));
 
-// Bài tập 3: Debounce function
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(this, args), delay);
+// Ví dụ thực tế: xử lý chuỗi
+const vietHoa = (str) => str.toUpperCase();
+const loaiBoDauCach = (str) => str.trim();
+const themChamThan = (str) => str + "!";
+
+const xuLyChuoi = pipe(loaiBoDauCach, vietHoa, themChamThan);
+console.log("Ví dụ 2 - Xử lý chuỗi:", xuLyChuoi("  xin chào  "));
+
+// ========================================
+// 18. PARTIAL APPLICATION (ÁP DỤNG MỘT PHẦN)
+// ========================================
+
+console.log("\n=== 18. PARTIAL APPLICATION ===");
+
+// Partial Application: fix một số tham số của hàm
+// Tạo hàm mới với ít tham số hơn
+// Khác currying: không bắt buộc từng tham số riêng lẻ
+
+// Ví dụ 1: Partial application thủ công
+function tinhTien(soLuong, donGia, thue) {
+  return soLuong * donGia * (1 + thue);
+}
+
+// Tạo hàm tính tiền cho sản phẩm giá 50k với thuế 10%
+function tinhTienSanPham50k(soLuong) {
+  return tinhTien(soLuong, 50000, 0.1);
+}
+
+console.log("Ví dụ 1 - Mua 3 sản phẩm:", tinhTienSanPham50k(3));
+console.log("Ví dụ 1 - Mua 5 sản phẩm:", tinhTienSanPham50k(5));
+
+// Ví dụ 2: Partial application với bind()
+function greet(greeting, name, punctuation) {
+  return `${greeting} ${name}${punctuation}`;
+}
+
+// bind() có thể fix các tham số đầu
+const greetXinChao = greet.bind(null, "Xin chào");
+const greetXinChaoNgoc = greet.bind(null, "Xin chào", "Ngọc");
+
+console.log("Ví dụ 2 - Partial 1 tham số:", greetXinChao("Nam", "!"));
+console.log("Ví dụ 2 - Partial 2 tham số:", greetXinChaoNgoc("?"));
+
+// Tạo hàm partial tổng quát
+function partial(fn, ...argsFixed) {
+  return function (...argsNew) {
+    return fn(...argsFixed, ...argsNew);
   };
 }
 
-const debouncedLog = debounce((message) => {
-  console.log("Debounced:", message);
-}, 1000);
+const nhan = (a, b, c) => a * b * c;
+const nhanVoi2Va3 = partial(nhan, 2, 3);
+console.log("Ví dụ 2 - Partial function:", nhanVoi2Va3(4)); // 2 * 3 * 4
 
-// Test debounce
-debouncedLog("First call");
-debouncedLog("Second call");
-debouncedLog("Third call"); // Only this will execute after 1 second
+// ========================================
+// 19. FUNCTION PARAMETERS BEST PRACTICES
+// ========================================
+
+console.log("\n=== 19. BEST PRACTICES ===");
+
+// Các nguyên tắc tốt khi làm việc với hàm và tham số
+
+// Ví dụ 1: Giới hạn số lượng tham số (tối đa 3-4)
+// ❌ Tránh: quá nhiều tham số
+function taoNguoiDungXau(ten, tuoi, email, sdt, diaChi, ngheNghiep, luong) {
+  // Khó nhớ thứ tự, dễ nhầm
+  return { ten, tuoi, email, sdt, diaChi, ngheNghiep, luong };
+}
+
+// ✅ Nên dùng: object parameter
+function taoNguoiDungTot({ ten, tuoi, email, sdt, diaChi, ngheNghiep, luong }) {
+  // Rõ ràng, không quan tâm thứ tự
+  return { ten, tuoi, email, sdt, diaChi, ngheNghiep, luong };
+}
+
+console.log("Ví dụ 1 - Cách tốt:");
+console.log(
+  taoNguoiDungTot({
+    ten: "Lan",
+    email: "lan@mail.com",
+    tuoi: 25,
+    sdt: "0123456789",
+    diaChi: "HN",
+    ngheNghiep: "Dev",
+    luong: 20000000,
+  })
+);
+
+// Ví dụ 2: Validation tham số
+function tinhLuong(luongCoBan, heSo = 1) {
+  // Kiểm tra tham số đầu vào
+  if (typeof luongCoBan !== "number" || luongCoBan < 0) {
+    throw new Error("Lương cơ bản phải là số dương");
+  }
+
+  if (typeof heSo !== "number" || heSo < 0) {
+    throw new Error("Hệ số phải là số dương");
+  }
+
+  return luongCoBan * heSo;
+}
+
+console.log("Ví dụ 2 - Tính lương hợp lệ:", tinhLuong(5000000, 2.5));
+
+try {
+  console.log("Ví dụ 2 - Tham số sai:", tinhLuong(-5000000));
+} catch (error) {
+  console.log("Ví dụ 2 - Lỗi:", error.message);
+}
+
+// ========================================
+// 20. ADVANCED FUNCTION PATTERNS
+// ========================================
+
+console.log("\n=== 20. ADVANCED PATTERNS ===");
+
+// Các pattern nâng cao với hàm
+
+// Ví dụ 1: Function Overloading (mô phỏng)
+// JavaScript không hỗ trợ overloading thực sự
+// Nhưng có thể mô phỏng bằng cách kiểm tra arguments
+function xuLyDuLieu(...args) {
+  // Xử lý khác nhau dựa vào số lượng và kiểu tham số
+  if (args.length === 0) {
+    return "Không có dữ liệu";
+  }
+
+  if (args.length === 1) {
+    if (typeof args[0] === "number") {
+      return `Số: ${args[0]}`;
+    }
+    if (typeof args[0] === "string") {
+      return `Chuỗi: ${args[0]}`;
+    }
+    if (Array.isArray(args[0])) {
+      return `Mảng có ${args[0].length} phần tử`;
+    }
+  }
+
+  if (args.length === 2) {
+    return `Hai tham số: ${args[0]} và ${args[1]}`;
+  }
+
+  return `Nhiều tham số: ${args.join(", ")}`;
+}
+
+console.log("Ví dụ 1 - Không tham số:", xuLyDuLieu());
+console.log("Ví dụ 1 - Một số:", xuLyDuLieu(42));
+console.log("Ví dụ 1 - Một chuỗi:", xuLyDuLieu("Hello"));
+console.log("Ví dụ 1 - Một mảng:", xuLyDuLieu([1, 2, 3]));
+console.log("Ví dụ 1 - Hai tham số:", xuLyDuLieu(10, 20));
+
+// Ví dụ 2: Fluent Interface (Method Chaining)
+class MayTinhFlowAPI {
+  constructor(value = 0) {
+    this.value = value;
+  }
+
+  cong(n) {
+    this.value += n;
+    return this; // Trả về this để chain tiếp
+  }
+
+  tru(n) {
+    this.value -= n;
+    return this;
+  }
+
+  nhan(n) {
+    this.value *= n;
+    return this;
+  }
+
+  chia(n) {
+    if (n === 0) throw new Error("Không chia được cho 0");
+    this.value /= n;
+    return this;
+  }
+
+  ketQua() {
+    return this.value;
+  }
+}
+
+console.log("Ví dụ 2 - Method Chaining:");
+const calc = new MayTinhFlowAPI(10);
+const result = calc
+  .cong(5) // 10 + 5 = 15
+  .nhan(2) // 15 * 2 = 30
+  .tru(10) // 30 - 10 = 20
+  .chia(4) // 20 / 4 = 5
+  .ketQua();
+console.log("Kết quả:", result);
+
+// ========================================
+// KẾT THÚC: TÓM TẮT KIẾN THỨC
+// ========================================
+
+console.log("\n" + "=".repeat(50));
+console.log("TÓM TẮT: HÀM VÀ THAM SỐ TRONG JAVASCRIPT");
+console.log("=".repeat(50));
+console.log(`
+1. Function Declaration - Khai báo hàm cơ bản
+2. Function Expression - Biểu thức hàm
+3. Arrow Function - Hàm mũi tên (ES6)
+4. Default Parameters - Tham số mặc định
+5. Rest Parameters - Tham số còn lại (...)
+6. Arguments Object - Đối tượng arguments
+7. Callback Function - Hàm gọi lại
+8. Higher-Order Function - Hàm bậc cao
+9. Closure - Bảo đóng
+10. IIFE - Hàm tự gọi
+11. Destructuring Parameters - Tham số phân rã
+12. Named Parameters - Tham số đặt tên
+13. Pure Function - Hàm thuần túy
+14. Currying - Hàm kari
+15. Recursion - Đệ quy
+16. Memoization - Ghi nhớ kết quả
+17. Function Composition - Kết hợp hàm
+18. Partial Application - Áp dụng một phần
+19. Best Practices - Thực hành tốt nhất
+20. Advanced Patterns - Các mẫu nâng cao
+`);
+
+console.log("✅ Đã hoàn thành tất cả ví dụ!");
+console.log("💡 Chạy file: node index.js");
