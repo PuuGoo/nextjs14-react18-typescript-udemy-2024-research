@@ -117,15 +117,18 @@ console.log("Rectangle area:", calculateArea(5, 8)); // 5 * 8 = 40
 console.log("\n=== REST PARAMETERS ===");
 
 // Rest parameters - thu thập tất cả tham số còn lại
+// numbers là mảng chứa mọi đối số gom bằng dấu ...
 function sum(...numbers) {
+  // reduce cộng dồn từng phần tử vào tổng, khởi tạo từ 0
   return numbers.reduce((total, num) => total + num, 0);
 }
 
-console.log("Sum of numbers:", sum(1, 2, 3, 4, 5,6));
+console.log("Sum of numbers:", sum(1, 2, 3, 4, 5, 6));
 console.log("Sum with different count:", sum(10, 20));
 
 // Rest parameters kết hợp với tham số thường
 function logMessage(level, ...messages) {
+  // messages là mảng các phần nội dung cần ghép
   console.log(`[${level}]`, messages.join(" "));
 }
 
@@ -133,6 +136,7 @@ logMessage("INFO", "System", "started", "successfully");
 logMessage("ERROR", "Connection", "failed");
 
 // Rest parameters với arrow function
+// Math.max cần từng đối số riêng lẻ nên dùng ...nums để trải ra
 const findMax = (...nums) => Math.max(...nums);
 console.log("Max number:", findMax(3, 7, 2, 9, 1));
 
@@ -146,6 +150,7 @@ console.log("\n=== ARGUMENTS OBJECT ===");
 function oldStyleSum() {
   let total = 0;
   for (let i = 0; i < arguments.length; i++) {
+    // arguments là đối tượng dạng mảng chứa toàn bộ tham số truyền vào
     total += arguments[i];
   }
   return total;
@@ -155,6 +160,7 @@ console.log("Arguments object sum:", oldStyleSum(1, 2, 3, 4));
 
 // Chuyển arguments thành array
 function argumentsToArray() {
+  // Array.from giúp biến arguments thành mảng thực sự để thao tác linh hoạt
   const argsArray = Array.from(arguments);
   console.log("Arguments as array:", argsArray);
   return argsArray;
@@ -165,6 +171,7 @@ argumentsToArray("a", "b", "c");
 // Lưu ý: Arrow functions không có arguments object
 const arrowWithArgs = () => {
   try {
+    // Arrow function không sở hữu arguments nên truy cập sẽ lỗi
     console.log(arguments); // ❌ ReferenceError
   } catch (error) {
     console.log("Arrow functions don't have arguments object");
